@@ -15,7 +15,7 @@ export const VisitorItem: React.FC<VisitorItemProps> = ({ visitor, onEdit, onDel
         <h3>{visitor.fullName}</h3>
         <p>Компания: {visitor.company}</p>
         <p>Группа: {visitor.group}</p>
-        <p>Присутствие: {visitor.present}</p>
+        <p>Присутствует на сайте: {visitor.present ? 'да' : 'нет'}</p>
       </div>
       <div className="visitor-actions">
         <button onClick={() => onEdit(visitor)}>Редактировать</button>
