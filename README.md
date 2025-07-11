@@ -126,7 +126,7 @@
 
 **Редактирование информации о существующем посетителе**<br>
 
-<img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/a475aeae-ca6a-4671-bb71-b7cfc8c2955d" /><br><br><br>
+<img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/a475aeae-ca6a-4671-bb71-b7cfc8c2955d" /><br><br>
 
 
 ## Использование
