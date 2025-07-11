@@ -1,69 +1,149 @@
-# React + TypeScript + Vite
+# Приложение-журнал посетителей сайта
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Это одностраничное приложение (SPA) на React с использованием TypeScript и Vite для управления списком посетителей. Приложение поддерживает CRUD-операции (создание, чтение, обновление, удаление) и фильтрацию данных по имени и статусу присутствия. В качестве имитации бэкенда используется `json-server`, который работает на `localhost:3000`. Приложение запускается на `localhost:5173`.
 
-Currently, two official plugins are available:
+## Основные функции
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **CRUD-операции**: Добавление, просмотр, редактирование и удаление записей о посетителях.
+- **Фильтрация**: Поиск по имени и фильтрация по статусу присутствия (присутствует/отсутствует) с сохранением фильтров в URL-параметрах.
+- **Интерфейс**: Таблица с данными, модальное окно для редактирования/добавления, статистика по количеству присутствующих и отсутствующих.
+- **Стилизация**: Кастомные CSS-стили с адаптивной версткой и анимациями для модального окна.
+- **Docker**: Поддержка сборки и запуска приложения в контейнерах с помощью Dockerfile и docker-compose.
 
-## Expanding the ESLint configuration
+## Технологии
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend**: React, TypeScript, Vite
+- **Backend (имитация)**: json-server
+- **Стили**: CSS с модульной структурой
+- **Контейнеризация**: Docker, docker-compose
+- **Дополнительно**: Использование хуков (useState, useEffect), типизация через интерфейсы
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Установка и запуск
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Требования
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Node.js (версия 18 или выше)
+- npm
+- Docker (для запуска в контейнерах)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Локальный запуск
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. **Клонируйте репозиторий**:
+   ```bash
+   git clone <URL-репозитория>
+   cd itlabs-test-web
+   ```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2. **Установите зависимости**:
+   ```bash
+   npm install
+   ```
+
+3. **Запустите json-server** (имитация бэкенда):
+   Убедитесь, что файл `db.json` находится в корневой директории проекта, затем выполните:
+   ```bash
+   npx json-server --watch db.json --port 3000
+   ```
+
+4. **Запустите приложение**:
+   В другом терминале выполните:
+   ```bash
+   npm run dev
+   ```
+   Приложение будет доступно по адресу `http://localhost:5173`.
+
+### Запуск через Docker
+
+1. **Соберите и запустите контейнеры**:
+   Убедитесь, что Docker и docker-compose установлены, затем выполните:
+   ```bash
+   docker-compose up --build
+   ```
+   - Фронтенд будет доступен на `http://localhost:5173`.
+   - Бэкенд (json-server) будет доступен на `http://localhost:3000`.
+
+2. **Остановка контейнеров**:
+   ```bash
+   docker-compose down
+   ```
+
+3. **Просмотр логов**:
+   ```bash
+   docker-compose logs
+   ```
+
+4. **Решение конфликта имен контейнеров**:
+   Если возникает ошибка о конфликте имен, удалите старый контейнер:
+   ```bash
+   docker rm -f visitor-container
+   ```
+
+### Альтернативный запуск через Docker (без docker-compose)
+
+1. **Соберите образ**:
+   ```bash
+   docker build -t itlabs-test-web .
+   ```
+
+2. **Запустите контейнер**:
+   ```bash
+   docker run -p 5173:5173 -p 3000:3000 --name visitor-container itlabs-test-web
+   ```
+
+3. **Удаление старого контейнера при конфликте**:
+   Если имя контейнера уже используется:
+   ```bash
+   docker rm -f visitor-container
+   ```
+
+## Структура проекта
+
+- **`src/components/`**: Компоненты React (VisitorForm, Modal).
+- **`src/hooks/`**: Кастомный хук `useVisitors` для работы с данными.
+- **`src/types/`**: Типы и интерфейсы для TypeScript.
+- **`src/App.tsx`**: Главный компонент приложения.
+- **`src/*.css`**: Стили для компонентов.
+- **`db.json`**: Файл базы данных для json-server.
+
+## Скриншоты
+
+**Главная страница**
+<img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/24b464be-7534-484c-a71d-13eb30b8045a" />
+
+**Поиск по ФИО**
+<img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/537a8c28-2544-4da2-89b5-b1cf5a371b7a" />
+
+**Фильтрация по присутствию**
+<img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/3fd12f9c-8457-45ed-a23e-ffe7d195ee53" />
+<img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/c2b14b9f-3cc0-40ec-97e9-35a2ce0d656b" />
+
+**Добавление нового посетителя**
+<img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/212c4a12-42f5-4b83-82ee-9f9379c7d0b4" />
+
+**Редактирование информации о существующем посетителе**
+<img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/a475aeae-ca6a-4671-bb71-b7cfc8c2955d" />
+
+
+## Использование
+
+1. **Главная страница**:
+   - Отображает таблицу с данными о посетителях.
+   - В верхней части есть поле для поиска по имени, кнопка "Добавить" и статистика.
+   - В нижней части есть фильтры по статусу присутствия.
+
+2. **Добавление/Редактирование**:
+   - Нажмите "Добавить" или кликните по строке в таблице, чтобы открыть модальное окно.
+   - Заполните форму и сохраните данные.
+
+3. **Удаление**:
+   - В модальном окне редактирования есть кнопка "Удалить" для удаления записи.
+
+4. **Фильтрация**:
+   - Используйте поле поиска для фильтрации по имени.
+   - Используйте кнопки внизу страницы для фильтрации по статусу присутствия.
+
+## Возможные проблемы и решения
+
+- **CORS-ошибки**: Убедитесь, что `json-server` запущен на `localhost:3000` и доступен из приложения.
+- **Ошибка `sh: serve: not found` в Docker**: Убедитесь, что `serve` установлен глобально в `Dockerfile` (`npm install -g serve`).
+- **Конфликт имен контейнеров**: Удалите старый контейнер с помощью `docker rm -f <имя-контейнера>`.
