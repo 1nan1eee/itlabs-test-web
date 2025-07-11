@@ -111,22 +111,27 @@
 
 <img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/24b464be-7534-484c-a71d-13eb30b8045a" />
 
+
 **Поиск по ФИО**
 
 <img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/537a8c28-2544-4da2-89b5-b1cf5a371b7a" />
+
 
 **Фильтрация по присутствию**
 
 <img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/3fd12f9c-8457-45ed-a23e-ffe7d195ee53" />
 <img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/c2b14b9f-3cc0-40ec-97e9-35a2ce0d656b" />
 
+
 **Добавление нового посетителя**
 
 <img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/212c4a12-42f5-4b83-82ee-9f9379c7d0b4" />
 
+
 **Редактирование информации о существующем посетителе**
 
 <img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/a475aeae-ca6a-4671-bb71-b7cfc8c2955d" />
+
 
 
 ## Использование
