@@ -5,7 +5,7 @@ export enum VisitorGroup {
 }
 
 export interface Visitor {
-  id: number;
+  id?: number;
   fullName: string;
   company: string;
   group: VisitorGroup;

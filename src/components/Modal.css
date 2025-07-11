@@ -8,15 +8,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.modal-overlay.active {
+  opacity: 1;
 }
 
 .modal-content {
   background: white;
-  padding: 20px;
-  border-radius: 5px;
+  padding: 35px;
+  border-radius: 30px;
   position: relative;
   min-width: 700px;
   color: #4e3000;
+  transform: scale(0.7);
+  opacity: 0;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1);
+  opacity: 1;
 }
 
 .modal-close {
@@ -27,6 +42,11 @@
   background: none;
   font-size: 20px;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.modal-close:hover {
+  transform: scale(1.1);
 }
 
 .modal-close img {

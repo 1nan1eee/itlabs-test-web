@@ -7,7 +7,7 @@ interface VisitorFormProps {
   visitor?: Visitor;
   onSubmit: (visitor: Visitor) => void;
   onCancel: () => void;
-  onDelete?: (id: number) => void; // Новый проп для обработки удаления
+  onDelete?: (id: number) => void;
 }
 
 export const VisitorForm: React.FC<VisitorFormProps> = ({ visitor, onSubmit, onCancel, onDelete }) => {
@@ -37,7 +37,11 @@ export const VisitorForm: React.FC<VisitorFormProps> = ({ visitor, onSubmit, onC
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    const dataToSubmit = { ...formData };
+    if (!visitor) {
+      delete dataToSubmit.id;
+    }
+    onSubmit(dataToSubmit as Visitor);
   };
 
   const handleDeleteClick = () => {

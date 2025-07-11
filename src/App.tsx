@@ -34,6 +34,7 @@ function App() {
 
   const presentVisitors = visitors.filter(v => v.present).length;
   const absentVisitors = visitors.filter(v => !v.present).length;
+  let count = 1;
 
   const handleAdd = () => {
     setEditingVisitor(undefined);
@@ -100,7 +101,7 @@ function App() {
                 onClick={() => handleRowClick(visitor)}
                 className="visitor-row"
               >
-                <td>{visitor.id}</td>
+                <td>{count++}</td>
                 <td>{visitor.fullName}</td>
                 <td>{visitor.company || '-'}</td>
                 <td>{visitor.group || '-'}</td>

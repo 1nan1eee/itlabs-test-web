@@ -13,6 +13,13 @@
       "company": "ООО Василёк",
       "group": "Клиент",
       "present": false
+    },
+    {
+      "id": "39ca",
+      "fullName": "Зубенко Михаил Петрович",
+      "company": "ООО \"АСОЛЬ\"",
+      "group": "Партнер",
+      "present": true
     }
   ]
 }
