@@ -7,10 +7,12 @@ interface VisitorFormProps {
   visitor?: Visitor;
   onSubmit: (visitor: Visitor) => void;
   onCancel: () => void;
+  onDelete?: (id: number) => void; // Новый проп для обработки удаления
 }
 
-export const VisitorForm: React.FC<VisitorFormProps> = ({ visitor, onSubmit, onCancel }) => {
+export const VisitorForm: React.FC<VisitorFormProps> = ({ visitor, onSubmit, onCancel, onDelete }) => {
   const [formData, setFormData] = useState<Visitor>({
+    id: 0,
     fullName: '',
     company: '',
     group: VisitorGroup.Passerby,
@@ -38,10 +40,16 @@ export const VisitorForm: React.FC<VisitorFormProps> = ({ visitor, onSubmit, onC
     onSubmit(formData);
   };
 
+  const handleDeleteClick = () => {
+    if (visitor && visitor.id && onDelete) {
+      onDelete(visitor.id);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit} className="visitor-form">
       <div className="form-group">
-        <label>ФИО:</label>
+        <label>ФИО</label>
         <input
           type="text"
           name="fullName"
@@ -51,7 +59,7 @@ export const VisitorForm: React.FC<VisitorFormProps> = ({ visitor, onSubmit, onC
         />
       </div>
       <div className="form-group">
-        <label>Компания:</label>
+        <label>Компания</label>
         <input
           type="text"
           name="company"
@@ -61,7 +69,7 @@ export const VisitorForm: React.FC<VisitorFormProps> = ({ visitor, onSubmit, onC
         />
       </div>
       <div className="form-group">
-        <label>Группа:</label>
+        <label>Группа</label>
         <select
           name="group"
           value={formData.group}
@@ -75,18 +83,26 @@ export const VisitorForm: React.FC<VisitorFormProps> = ({ visitor, onSubmit, onC
           ))}
         </select>
       </div>
-      <div className="form-group">
-        <label>Присутствие:</label>
+      <div className="form-group-checkbox">
+        <label>Присутствие</label>
         <input
           type="checkbox"
           name="present"
           checked={formData.present}
           onChange={handleCheckboxChange}
-          required
         />
       </div>
       <div className="form-actions">
         <button type="submit">Сохранить</button>
+        {visitor && onDelete && (
+          <button
+            type="button"
+            onClick={handleDeleteClick}
+            className="delete-button"
+          >
+            Удалить
+          </button>
+        )}
         <button type="button" onClick={onCancel}>
           Отмена
         </button>

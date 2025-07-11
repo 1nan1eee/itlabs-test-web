@@ -14,7 +14,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     <div className="modal-overlay">
       <div className="modal-content">
         <button className="modal-close" onClick={onClose}>
-          ×
+          <img src="/assets/close_icon.png" alt="Иконка закрытия модального окна" />
         </button>
         {children}
       </div>

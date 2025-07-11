@@ -2,19 +2,34 @@ import React from 'react';
 import './FilterBar.css';
 
 interface FilterBarProps {
-  filter: string;
-  onFilterChange: (filter: string) => void;
+  search: string;
+  presenceFilter: string;
+  onSearchChange: (search: string) => void;
+  onPresenceChange: (presence: string) => void;
 }
 
-export const FilterBar: React.FC<FilterBarProps> = ({ filter, onFilterChange }) => {
+export const FilterBar: React.FC<FilterBarProps> = ({
+  search,
+  presenceFilter,
+  onSearchChange,
+  onPresenceChange,
+}) => {
   return (
     <div className="filter-bar">
       <input
         type="text"
-        placeholder="Фильтр по имени..."
-        value={filter}
-        onChange={(e) => onFilterChange(e.target.value)}
+        placeholder="Поиск по имени..."
+        value={search}
+        onChange={e => onSearchChange(e.target.value)}
       />
+      <select
+        value={presenceFilter}
+        onChange={e => onPresenceChange(e.target.value)}
+      >
+        <option value="all">Все</option>
+        <option value="present">Присутствуют</option>
+        <option value="absent">Отсутствуют</option>
+      </select>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import type { Visitor } from '../types';
+import { Visitor } from '../types';
 
 export const useVisitors = () => {
   const [visitors, setVisitors] = useState<Visitor[]>([]);

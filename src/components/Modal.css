@@ -15,8 +15,8 @@
   padding: 20px;
   border-radius: 5px;
   position: relative;
-  min-width: 300px;
-  max-width: 500px;
+  min-width: 700px;
+  color: #4e3000;
 }
 
 .modal-close {
@@ -27,4 +27,10 @@
   background: none;
   font-size: 20px;
   cursor: pointer;
+}
+
+.modal-close img {
+  max-height: 25px;
+  width: auto;
+  object-fit: contain;
 }
